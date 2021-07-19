@@ -8,6 +8,9 @@ export class Task extends BaseEntity {
   id: number;
 
   @Column()
+  title: string;
+
+  @Column()
   description: string;
 
   @Column()
