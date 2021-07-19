@@ -22,7 +22,7 @@ export class TasksController {
   constructor(private tasksService: TasksService) {}
 
   @Get()
-  getTasks(@Query() filterDto: GetTasksFilterdDto): Task[] {
+  getTasks(@Query(ValidationPipe) filterDto: GetTasksFilterdDto): Task[] {
     if (Object.keys(filterDto).length) {
       return this.tasksService.getTasksFiltered(filterDto);
     } else {
