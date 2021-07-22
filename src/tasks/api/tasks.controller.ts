@@ -12,12 +12,12 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 
-import { CreateTaskDto } from './dto/create-task.dto';
-import { GetTasksFilterdDto } from './dto/get-tasks-filter.dto';
-import { TaskStatusValidationPipe } from './pipes/task-status-validation.pipe';
-import { Task } from './task.entity';
-import { TaskStatus } from './task-status.enum';
-import { TasksService } from './tasks.service';
+import { CreateTaskDto } from '../application/models/dtos/create-task.dto';
+import { GetTasksFilterdDto } from '../application/models/dtos/get-tasks-filter.dto';
+import { TaskStatusValidationPipe } from '../application/pipe-lines/task-status-validation.pipe';
+import { TasksService } from '../application/services/tasks.service';
+import { Task } from '../domain/task.entity';
+import { TaskStatus } from '../domain/task-status.enum';
 
 @Controller('tasks')
 export class TasksController {
