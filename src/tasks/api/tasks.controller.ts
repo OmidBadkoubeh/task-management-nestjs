@@ -13,8 +13,8 @@ import {
 } from '@nestjs/common';
 
 import { CreateTaskDto } from '../application/models/dtos/create-task.dto';
-import { GetTasksFilterdDto } from '../application/models/dtos/get-tasks-filter.dto';
-import { TaskStatusValidationPipe } from '../application/pipe-lines/task-status-validation.pipe';
+import { GetTasksQuery } from '../application/models/dtos/get-tasks-filter.dto';
+import { TaskStatusValidationPipe } from '../application/pipes/task-status-validation.pipe';
 import { TasksService } from '../application/services/tasks.service';
 import { Task } from '../domain/task.entity';
 import { TaskStatus } from '../domain/task-status.enum';
@@ -24,10 +24,11 @@ export class TasksController {
   constructor(private tasksService: TasksService) {}
 
   @Get()
-  getTasks(
-    @Query(ValidationPipe) filterDto: GetTasksFilterdDto,
-  ): Promise<Task[]> {
-    return this.tasksService.getTasks(filterDto);
+  getTasks(@Query(ValidationPipe) filterDto: GetTasksQuery): Promise<Task[]> {
+    const getTasksQuery = new GetTasksQuery();
+    getTasksQuery.search = filterDto.search;
+    getTasksQuery.status = filterDto.status;
+    return this.tasksService.getTasks(getTasksQuery);
   }
 
   @Get('/:id')
